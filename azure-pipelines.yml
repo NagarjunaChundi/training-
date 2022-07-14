@@ -10,9 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-
-- task: SSH@0
+- task: ArchiveFiles@2
   inputs:
-    runOptions: 'commands'
-    commands: 'echo "devtest"'
-    readyTimeout: '20000'
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
